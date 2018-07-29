@@ -6,7 +6,8 @@
   "scripts": {
     "clear-lib": "rm -rf lib",
     "prepublish": "npm run clear-lib && npm run ngc-build",
-    "ngc-build": "ngc -p ./tsconfig-ngc.json"
+    "ngc-build": "ngc -p ./tsconfig-ngc.json",
+    "postinstall": "npm run prepublish"
   },
   "repository": {
     "type": "git",
