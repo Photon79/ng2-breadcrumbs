@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
-import {Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET} from "@angular/router";
-import "rxjs/add/operator/filter";
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET} from '@angular/router';
+import { filter } from 'rxjs/operators';
 import {IBreadcrumb} from "./breadcrumbs.model";
 import {BreadcrumbsService} from "./breadcrumbs.service";
 
@@ -65,7 +65,9 @@ export class BreadcrumbComponent implements OnInit {
         const PREFIX_BREADCRUMB: string = "prefixBreadcrumb";
 
         // subscribe to the NavigationEnd event
-        this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd)
+        ).subscribe(event => {
             // reset currentBreadcrumbs
             this.currentBreadcrumbs = [];
 
